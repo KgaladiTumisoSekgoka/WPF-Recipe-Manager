@@ -30,5 +30,5 @@ A C# WPF desktop application that allows users to create, scale, reset, clear, a
 1. **Clone the repository**  
    Open Terminal / Git Bash and run:
    ```bash
-   git clone https://github.com/your-username/recipe-manager-wpf.git
+   git clone https://github.com/KgaladiTumisoSekgoka/WPF-Recipe-Manager.git
    cd recipe-manager-wpf
