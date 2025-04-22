@@ -1,0 +1,206 @@
+﻿<Window x:Class="POEPart3.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:POEPart3"
+        mc:Ignorable="d"
+        Title="Recipe Manager Application :D" Height="600" Width="800">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush/>
+        </Grid.Background>
+        <TabControl>
+            <TabItem Header="RecipeMenu" Name="RecipeSelect">
+                <StackPanel>
+                    <StackPanel.Background>
+                        <ImageBrush ImageSource="/images/blue_pancakes.jpg" Stretch="UniformToFill" Opacity="0.76"/>
+                    </StackPanel.Background>
+                    <!-- Recipe Name -->
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="10">
+                        <TextBlock Text="Welcome to the Recipe Manager App!" FontSize="20" FontWeight="Bold" Margin="5" Foreground="#FF89ADCE" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="10">
+                        <TextBlock Text="Enter Recipe Name" Width="150" FontSize="17"/>
+                        <TextBox Width="200" Name="TxtRecipeName"/>
+                    </StackPanel>
+                    <!-- Ingredients Section -->
+                    <StackPanel Margin="10">
+                        <TextBlock Text="Ingredients" FontWeight="Bold" Margin="0,0,0,10" FontSize="20"/>
+                        <StackPanel Margin="5">
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                                <TextBlock Text="Ingredient name" Width="100" Margin="0,0,10,0" FontSize="13"/>
+                                <TextBox Width="200" Name="TxtIngredientName"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                                <TextBlock Text="Quantity" Width="100" Margin="0,0,10,0" FontSize="13"/>
+                                <TextBox Width="100" Name="TxtQuantity" FontSize="13"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                                <TextBlock Text="Unit" Width="100" Margin="0,0,10,0" FontSize="13"/>
+                                <TextBox Width="100" Name="TxtUnitOfMeasurement"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                                <TextBlock Text="Calories" Width="100" Margin="0,0,10,0" FontSize="13"/>
+                                <TextBox Width="100" Name="TxtCalories"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                                <TextBlock Text="Food Group" Width="150" FontSize="13"/>
+                                <ComboBox Width="100" Margin="-40,0,10,0" Name="CBFilterFoodGroup">
+                                    <ComboBoxItem>All</ComboBoxItem>
+                                    <ComboBoxItem>Grains</ComboBoxItem>
+                                    <ComboBoxItem>Vegetables</ComboBoxItem>
+                                    <ComboBoxItem>Fruits</ComboBoxItem>
+                                    <ComboBoxItem>Dairy</ComboBoxItem>
+                                    <ComboBoxItem>Protein</ComboBoxItem>
+                                    <ComboBoxItem>Fats and Oils</ComboBoxItem>
+                                    <ComboBoxItem>Sweets and Sugary Foods</ComboBoxItem>
+                                </ComboBox>
+                            </StackPanel>
+                            <Button Content="Add Ingredient" Click="AddIngredient_Click" HorizontalAlignment="Left" Margin="0,10,0,0" FontSize="13"/>
+                        </StackPanel>
+                        <!-- Steps Section -->
+                        <StackPanel Margin="10">
+                            <TextBlock Text="Steps" FontWeight="Bold" FontSize="20"/>
+                            <StackPanel Orientation="Horizontal" Margin="5">
+                                <TextBlock Text="Description" Width="150" FontSize="13"/>
+                                <TextBox Width="400" Name="TxtStepDescription"/>
+                                <Button Content="Add Step" Click="AddStep_Click" FontSize="13"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                    <!-- Display Recipe Button -->
+                    <Button Content="Add Recipe" Width="150" Margin="10" Click="DisplayRecipe_Click" FontSize="13"/>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="DisplayMenu" Name="RecipeDisplay">
+                <Grid>
+                    <StackPanel Margin="10">
+                        <StackPanel.Background>
+                            <ImageBrush ImageSource="/Images/cold_meats.jpeg" Stretch="UniformToFill" Opacity="0.755"/>
+                        </StackPanel.Background>
+                        <TextBlock Text="Display Recipes" FontSize="20" FontWeight="Bold" Margin="5"/>
+                        <ListBox Name="LstAllRecipes" Width="300" Height="100" Margin="5" SelectionChanged="LstAllRecipes_SelectionChanged"/>
+
+                        <TextBlock Text="Enter Recipe Name to Display" Margin="5" FontSize="13"/>
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <TextBox Width="200" Name="TxtDisplayName"/>
+                            <Button Content="Display Recipe" Width="100" Margin="5" Click="DisplaySpecificRecipe_Click" FontSize="13"/>
+                        </StackPanel>
+
+                        <TextBlock Name="TxtRecipeDetails" Margin="5" FontSize="15"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="ScaleMenu" Name="RecipeScale">
+                <TabItem.Background>
+                    <ImageBrush/>
+                </TabItem.Background>
+                <Grid>
+                    <StackPanel Margin="10">
+                        <StackPanel.Background>
+                            <ImageBrush ImageSource="/Images/bg-imagine.jpeg" Stretch="UniformToFill" Opacity="0.765"/>
+                        </StackPanel.Background>
+                        <TextBlock Text="Select Recipes to Scale" FontWeight="Bold" Margin="5" FontSize="20"/>
+                        <ListBox Name="LstRecipesToScale" Width="300" Height="100" Margin="5" SelectionMode="Extended"/>
+
+                        <TextBlock Text="Select Scaling Factor" FontWeight="Bold" Margin="5" FontSize="13"/>
+                        <ComboBox Name="CmbScalingFactor" Width="200" Margin="5">
+                            <ComboBoxItem Content="0.5"/>
+                            <ComboBoxItem Content="2"/>
+                            <ComboBoxItem Content="3"/>
+                        </ComboBox>
+
+                        <Button Content="Scale Recipes" Width="150" Margin="5" Click="ScaleRecipes_Click" FontSize="13"/>
+
+                        <TextBlock Text="Scaled Recipes" FontWeight="Bold" Margin="5" FontSize="13"/>
+                        <TextBlock Name="TxtScaledRecipes" Margin="5" TextWrapping="Wrap" FontSize="15"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="ResetRecipe" Name="RecipeReset">
+                <Grid>
+                    <StackPanel Margin="10">
+                        <StackPanel.Background>
+                            <ImageBrush ImageSource="/Images/dairy_products.jpeg" Stretch="UniformToFill" Opacity="0.755"/>
+                        </StackPanel.Background>
+                        <TextBlock Text="Select Recipes to Reset" FontWeight="Bold" Margin="5" FontSize="20"/>
+                        <ListBox Name="LstRecipesToReset" Width="300" Height="100" Margin="5" SelectionMode="Extended"/>
+
+                        <Button Content="Reset Selected Recipes" Width="200" Margin="5" Click="ResetRecipes_Click" FontSize="13"/>
+
+                        <TextBlock Text="Reset Recipes" FontWeight="Bold" Margin="5" FontSize="13"/>
+                        <TextBlock Name="TxtResetRecipes" Margin="5" TextWrapping="Wrap" FontSize="15"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="ClearRecipeData" Name="RecipeClear">
+                <Grid>
+                    <StackPanel Margin="10">
+                        <StackPanel.Background>
+                            <ImageBrush Stretch="UniformToFill" ImageSource="/Images/fruits_and_vegs.jpeg" Opacity="0.75"/>
+                        </StackPanel.Background>
+                        <TextBlock Text="Select Recipes to Clear" FontWeight="Bold" Margin="5" FontSize="20" Foreground="White"/>
+                        <ListBox Name="LstRecipesToClear" Width="300" Height="100" Margin="5" SelectionMode="Extended"/>
+
+                        <Button Content="Clear Selected Recipes" Width="200" Margin="5" Click="ClearRecipes_Click" FontSize="13"/>
+                        <Button Content="Clear All Recipes" Width="200" Margin="5" Click="ClearAllRecipes_Click" FontSize="13"/>
+
+                        <TextBlock Text="Cleared Recipes" FontWeight="Bold" Margin="5" FontSize="13"/>
+                        <TextBlock Name="TxtClearedRecipes" Margin="5" TextWrapping="Wrap" FontSize="15"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Filtering System" Name="RecipeFilter">
+                <TabItem.Background>
+                    <LinearGradientBrush EndPoint="0,1">
+                        <GradientStop Color="#FFF0F0F0"/>
+                        <GradientStop Color="White" Offset="1"/>
+                    </LinearGradientBrush>
+                </TabItem.Background>
+                <StackPanel Margin="10">
+                    <StackPanel.Background>
+                        <ImageBrush ImageSource="/images/blue_blackberry_cookies.jpg" Stretch="UniformToFill" Opacity="0.75"/>
+                    </StackPanel.Background>
+                    <TextBlock Text="Filter Recipes" FontWeight="Bold" FontSize="20" Margin="0,0,0,10"/>
+                    <!-- Ingredient Filter -->
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                        <TextBlock Text="Ingredient Name:" Width="150" FontSize="13"/>
+                        <TextBox Width="200" Name="TxtIngredientFilter" FontSize="13"/>
+                    </StackPanel>
+                    <!-- Food Group Filter -->
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                        <TextBlock Text="Food Group:" Width="150" FontSize="13"/>
+                        <ComboBox Width="200" Name="CBFoodGroupFilter" FontSize="13">
+                            <ComboBoxItem>All</ComboBoxItem>
+                            <ComboBoxItem>Grains</ComboBoxItem>
+                            <ComboBoxItem>Vegetables</ComboBoxItem>
+                            <ComboBoxItem>Fruits</ComboBoxItem>
+                            <ComboBoxItem>Dairy</ComboBoxItem>
+                            <ComboBoxItem>Protein</ComboBoxItem>
+                            <ComboBoxItem>Fats and Oils</ComboBoxItem>
+                            <ComboBoxItem>Sweets and Sugary Foods</ComboBoxItem>
+                        </ComboBox>
+                    </StackPanel>
+                    <!-- Calories Filter -->
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                        <TextBlock Text="Maximum Calories:" Width="150" FontSize="13"/>
+                        <TextBox Width="100" Name="TxtMaxCaloriesFilter" FontSize="13"/>
+                    </StackPanel>
+                    <!-- Apply Filter Button -->
+                    <Button Content="Apply Filter" Width="150" Margin="5" Click="ApplyFilter_Click" FontSize="13"/>
+                    <!-- Reset Filter Button -->
+                    <Button Content="Reset Filter" Width="150" Margin="5" Click="ResetFilter_Click" FontSize="13"/>
+                    <!-- Filtered Recipes TextBlock -->
+                    <TextBlock Name="TxtFilteredRecipes" Margin="5" TextWrapping="Wrap" FontSize="15"/>
+                </StackPanel>
+            </TabItem>
+
+        </TabControl>
+    </Grid>
+</Window>
